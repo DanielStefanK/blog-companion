@@ -1,5 +1,7 @@
 import express from "express";
 import * as bodyParser from "body-parser";
+import lampRoutes from "./routes/lamp";
+
 const app = express();
 app.use(
   bodyParser.json({
@@ -9,5 +11,5 @@ app.use(
     },
   })
 );
-app.get("/", (req, res) => res.send("Hello World!"));
+app.use("/lamp", lampRoutes);
 export { app };
