@@ -63,7 +63,7 @@ router.post("/toggle", async (req, res) => {
       auth: {
         user: NODE_RED_USER,
         pass: NODE_RED_PASS,
-        sendImmediately: true,
+        sendImmediately: false,
       },
     },
     () => {
