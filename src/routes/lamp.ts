@@ -1,7 +1,7 @@
 import express from "express";
 import request from "request";
 
-var router = express.Router();
+const router = express.Router();
 
 const API_KEY: string = process.env.API_KEY || "key";
 
@@ -16,7 +16,7 @@ let lampState = false;
 const providesKey = (
   req: express.Request,
   res: express.Response,
-  next: Function
+  next: () => void
 ) => {
   const apiKey = req.header("x-api-key");
 
@@ -45,7 +45,7 @@ router.post("/set-state", providesKey, (req, res) => {
   console.log(`setting the state to ${state}`);
   lampState = state;
 
-  res.json({ success: true, lampState: lampState });
+  res.json({ success: true, lampState });
 });
 
 router.get("/state", (req, res) => {
@@ -68,7 +68,7 @@ router.post("/toggle", async (req, res) => {
     },
     () => {
       lampState = !lampState;
-      res.json({ success: true, lampState: lampState });
+      res.json({ success: true, lampState });
     }
   );
 });
