@@ -1,0 +1,23 @@
+version: "3"
+services:
+  sticker-backend:
+    build: ./
+    container_name: website-companion
+    networks:
+      - web
+    labels:
+      - traefik.enabled=true
+      - traefik.backend=website-companion
+      - traefik.frontend.rule=Host:companion.daniel-stefan.dev
+      - traefik.docker.network=web
+      - traefik.port=5000
+    environment:
+      API_KEY: geheim
+      NODE_RED_URL: nodered
+      NODE_RED_USER: test
+      NODE_RED_PASS: test
+    restart: always
+
+networks:
+  web:
+    external: true
